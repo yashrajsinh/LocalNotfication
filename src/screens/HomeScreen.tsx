@@ -1,19 +1,28 @@
 import { View, Text } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import NotificationButton from '../components/NotificationButton';
 //Toast
 import Toast from 'react-native-toast-message';
+//ios notification permission
+import { notificationService } from '../utils/notification';
 
 type Props = {};
 
 const HomeScreen = (props: Props) => {
+  useEffect(() => {
+    notificationService.init();
+  }, []);
+
   const handleNotificaiton = () => {
     Toast.show({
       type: 'info',
-      text1: 'Coming Soon!',
-      text2: 'You will get notification in 1 light year',
+      text1: 'Check Notificaiton',
       position: 'bottom',
     });
+    notificationService.showNotification(
+      'Hello',
+      'This is local test notification',
+    );
   };
   return (
     <View style={{ flex: 1 }}>
