@@ -1,17 +1,37 @@
 import { createNavigationContainerRef } from '@react-navigation/native';
-//props type
+
 type Props = {
   Home: undefined;
   Profile: { postId: string };
 };
-let isReady = false;
+
 export const navigationRef = createNavigationContainerRef<Props>();
-export function setNavigationReady() {
-  isReady = true;
-}
+
+type PendingNav = {
+  name: keyof Props;
+  params?: any;
+} | null;
+
+let pendingNavigation: PendingNav = null;
 
 export function navigate(name: keyof Props, params?: any) {
-  if (isReady && navigationRef.isReady()) {
+  if (navigationRef.isReady()) {
     navigationRef.navigate(name as any, params);
+  } else {
+    console.log('NAV NOT READY → storing');
+    pendingNavigation = { name, params };
+  }
+}
+
+export function setNavigationReady() {
+  if (pendingNavigation) {
+    console.log('RUNNING PENDING NAV');
+
+    navigationRef.navigate(
+      pendingNavigation.name as any,
+      pendingNavigation.params,
+    );
+
+    pendingNavigation = null;
   }
 }
