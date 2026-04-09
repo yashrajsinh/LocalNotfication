@@ -5,7 +5,7 @@ type Props = {};
 
 const ProfileScreen = (props: Props) => {
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <Text>ProfileScreen</Text>
     </View>
   );
