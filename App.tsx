@@ -6,14 +6,8 @@ import {
   navigationRef,
   setNavigationReady,
 } from './src/services/navigationService';
-import { useEffect } from 'react';
-//BG noti
-import { sendAnswerNotification } from './src/utils/backGroundNotificaiton';
 
 function App() {
-  useEffect(() => {
-    sendAnswerNotification();
-  }, []);
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <NavigationContainer

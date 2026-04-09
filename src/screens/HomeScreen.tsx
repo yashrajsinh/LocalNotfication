@@ -5,12 +5,17 @@ import NotificationButton from '../components/NotificationButton';
 import Toast from 'react-native-toast-message';
 //notification permission (SINGLETON OBJ)
 import { notificationService } from '../utils/notification';
+//BG noti
+import { sendAnswerNotification } from '../utils/backGroundNotificaiton';
+import { initNotificationHandler } from '../services/notificationHandler';
 type Props = {};
 
 const HomeScreen = (props: Props) => {
   //load notfication channel and permision while app loads
   useEffect(() => {
     notificationService.init();
+    initNotificationHandler();
+    sendAnswerNotification();
   }, []);
 
   const handleNotificaiton = () => {
