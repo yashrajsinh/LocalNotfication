@@ -1,14 +1,14 @@
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import React, { useEffect } from 'react';
 import NotificationButton from '../components/NotificationButton';
 //Toast
 import Toast from 'react-native-toast-message';
-//ios notification permission
+//notification permission (SINGLETON OBJ)
 import { notificationService } from '../utils/notification';
-
 type Props = {};
 
 const HomeScreen = (props: Props) => {
+  //load notfication channel and permision while app loads
   useEffect(() => {
     notificationService.init();
   }, []);
